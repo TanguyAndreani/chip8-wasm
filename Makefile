@@ -1,17 +1,19 @@
 # Compiler Flags
-CC = gcc
-CCFLAGS += -Wall -Wextra
+CC = emcc
+CCFLAGS += -Wall -Wextra 
 UNAME := $(shell uname)
 ifeq ($(UNAME), Darwin)
 LDFLAGS = -framework OpenGL -framework GLUT
 else
-LDFLAGS = -lGL -lglut
+# add to compile without glDrawPixels:  -s ERROR_ON_UNDEFINED_SYMBOLS=0
+# add to show full linking command:     -s LLD_REPORT_UNDEFINED
+LDFLAGS = -lglut -lGL
 endif
 
-all: play
+all: play.js
 
-play: chip8.c play.c
-	$(CC) $(CCFLAGS) chip8.c play.c -o play $(LDFLAGS)
+play.js: chip8.c play.c
+	$(CC) $(CCFLAGS) chip8.c play.c -o $@ $(LDFLAGS)
 
 clean:
-	rm -f play
+	rm -f play.js play.wasm

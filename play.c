@@ -5,6 +5,8 @@
  */
 #include "chip8.h"
 
+#include "roms.h"
+
 #if defined(__APPLE__)
 #include <OpenGL/gl.h>
 #include <OpenGL/glu.h>
@@ -146,14 +148,18 @@ void reshape_window(GLsizei w, GLsizei h) {
 
 int main(int argc, char **argv) {
 
-    if (argc != 2) {
+    /*if (argc != 2) {
         fprintf(stderr, "Usage: ./play <game>\n");
         exit(2);
-    }
+    }*/
 
     // Setup Chip8
     chip8_initialize();
-    chip8_loadgame(argv[1]);
+    //chip8_loadgame(argv[1]);
+    chip8_loadgame_from_buffer(
+        __roms_games_Bowling__Gooitzen_van_der_Wal__ch8,
+        __roms_games_Bowling__Gooitzen_van_der_Wal__ch8_len
+    );
 
     // Setup OpenGL
     glutInit(&argc, argv);          

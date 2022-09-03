@@ -141,6 +141,16 @@ void chip8_initialize() {
     srand(time(NULL));
 }
 
+void chip8_loadgame_from_buffer(unsigned char *buffer, unsigned int size) {
+    if (NULL == buffer) {
+        fprintf(stderr, "Unable to load game from buffer: buffer is NULL\n");
+        exit(42);
+    }
+
+    memcpy(&memory[0x200], buffer, size);
+}
+
+
 void chip8_loadgame(char *game) {
     FILE *fgame;
 

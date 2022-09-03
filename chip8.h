@@ -28,6 +28,7 @@
 #define MAX_GAME_SIZE (0x1000 - 0x200)
 
 void chip8_initialize();
+void chip8_loadgame_from_buffer(unsigned char *buffer, unsigned int size);
 void chip8_loadgame(char *game);
 void chip8_emulatecycle();
 void chip8_setkeys();

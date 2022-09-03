@@ -1,1 +1,4 @@
 play
+play.js
+play.wasm
+*.o
